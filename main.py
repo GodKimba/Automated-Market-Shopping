@@ -169,14 +169,6 @@ driver.find_element(by=By.ID, value="holder-document-0").send_keys(cpf)
 driver.close()
 
 
-# Selecting day to ship, using css class and f string to get only tuesdays
-# ship_day = 0
-# if calendar.TUESDAY == True:
-#     ship_day = date.today().day + 1
-# time.sleep(5)
-# driver.find_element(
-#     by=By.CLASS_NAME, value=f"react-datepicker__day react-datepicker__day--010"
-# ).click()
 
 
 """
