@@ -170,13 +170,3 @@ driver.find_element(by=By.ID, value="holder-document-0").send_keys(cpf)
 
 driver.close()
 
-
-
-
-"""
-Bug relacionado ao carregamento da pagina de confirmacao do cep(as vezes fica rodando e da erro de elemento nao presente)
-    talvez criar um wait until element present ou depois de timeout recarregar a pagina e continuar de onde estava
-
-Bug relacionado a 'proceed to checkout' quando o carrinho ainda esta vazio
-    pensar numa forma de confirmar se o carrinho esta vazio. Deve ter algum elemento em html ou css no codigo fonte que forneca essa informacao
-"""
