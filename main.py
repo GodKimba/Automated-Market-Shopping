@@ -207,5 +207,7 @@ Bug relacionado ao carregamento da pagina de confirmacao do cep(as vezes fica ro
 Bug relacionado a 'proceed to checkout' quando o carrinho ainda esta vazio
     pensar numa forma de confirmar se o carrinho esta vazio. Deve ter algum elemento em html ou css no codigo fonte que forneca essa informacao
 
-Linha 71 erro. Quando a lista de carrinho fica em branco
+Bug Linha 71 erro. Quando a lista de carrinho fica em branco
+
+Bug information on identification page is written then deleted by the website, line: 128
 """
