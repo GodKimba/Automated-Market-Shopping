@@ -12,9 +12,9 @@ import time
 
 
 # ZonaSul(Market) credentials, using environment variables to hide sensible info
-username = os.environ.get('username_key')
-password = os.environ.get('password_key')
-first_name = os.environ.get('first_name_key')
+username = os.environ.get("username_key")
+password = os.environ.get("password_key")
+first_name = os.environ.get("first_name_key")
 last_name = os.environ.get("last_name_key")
 cpf = os.environ.get("cpf_key")
 phone_number = os.environ.get("phone_number_key")
@@ -25,10 +25,10 @@ cep = os.environ.get("cep_key")
 
 # Credit Card Info
 card_number = os.environ.get("card_number_key")
-on_card_name = os.environ.get('on_card_name_key')
-card_expiration_month = os.environ.get('card_expiration_month_key')
-card_expiration_year = os.environ.get('card_expiration_year_key')
-card_security_number = os.environ.get('card_security_number_key')
+on_card_name = os.environ.get("on_card_name_key")
+card_expiration_month = os.environ.get("card_expiration_month_key")
+card_expiration_year = os.environ.get("card_expiration_year_key")
+card_security_number = os.environ.get("card_security_number_key")
 
 
 # Initialize Chrome driver
@@ -39,9 +39,7 @@ driver.get("https://autenticacao.zonasul.com.br/login")
 timeout = 15
 
 # Loging in
-driver.find_element(by=By.NAME, value="document").send_keys(
-    username + "\n"
-)
+driver.find_element(by=By.NAME, value="document").send_keys(username + "\n")
 
 # Waiting page to load and getting password
 try:
@@ -73,6 +71,7 @@ insert_to_cart_position = driver.find_element(by=By.CLASS_NAME, value="card__btn
 actions.click(insert_to_cart_position)
 actions.perform()
 
+# Inserting CEP info to get past the popup
 time.sleep(5)
 driver.find_element(by=By.CLASS_NAME, value="card__btn").click()
 driver.find_element(
@@ -103,8 +102,13 @@ except TimeoutExpired:
 driver.find_element(
     by=By.CLASS_NAME, value="zonasul-zonasul-minicart-0-x-closeIcon"
 ).click()
-driver.find_element(by=By.CLASS_NAME, value="card__btn").click()
+
 time.sleep(2)
+driver.find_element(by=By.CLASS_NAME, value="card__btn").click()
+
+time.sleep(2)
+
+
 # Checking out
 driver.get("https://www.zonasul.com.br/cart")
 driver.find_element(
@@ -144,7 +148,11 @@ driver.find_element(by=By.ID, value="btn-go-to-payment").click()
 time.sleep(3)
 
 # Switching to the frame that keeps credit card inputs
-driver.switch_to.frame(0)  
+driver.find_element(
+    by=By.XPATH, value='//*[@id="payment-group-creditCardPaymentGroup"]/span'
+).click()
+time.sleep(1)
+driver.switch_to.frame(0)
 time.sleep(1)
 driver.find_element(
     by=By.XPATH, value='//*[@id="creditCardpayment-card-0Number"]'
@@ -169,4 +177,3 @@ driver.find_element(by=By.ID, value="holder-document-0").send_keys(cpf)
 
 
 driver.close()
-
