@@ -11,7 +11,7 @@ import os
 import time
 
 
-# ZS credentials
+# ZonaSul(Market) credentials, using environment variables to hide sensible info
 username = os.environ.get('username_key')
 password = os.environ.get('password_key')
 first_name = os.environ.get('first_name_key')
@@ -41,7 +41,7 @@ timeout = 15
 # Loging in
 driver.find_element(by=By.NAME, value="document").send_keys(
     username + "\n"
-)  # Getting username
+)
 
 # Waiting page to load and getting password
 try:
@@ -142,7 +142,9 @@ driver.find_element(
 # Going to payment and finishing order
 driver.find_element(by=By.ID, value="btn-go-to-payment").click()
 time.sleep(3)
-driver.switch_to.frame(0)  # switching to the frame that keeps credit card inputs
+
+# Switching to the frame that keeps credit card inputs
+driver.switch_to.frame(0)  
 time.sleep(1)
 driver.find_element(
     by=By.XPATH, value='//*[@id="creditCardpayment-card-0Number"]'
