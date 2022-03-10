@@ -41,8 +41,7 @@ timeout = 15
 # Loging in
 driver.find_element(by=By.NAME, value="document").send_keys(
     username + "\n"
-)  # Getting username
-
+)
 # Waiting page to load and getting password
 try:
     password_present_in_page = EC.presence_of_element_located((By.NAME, "password"))
@@ -73,6 +72,7 @@ insert_to_cart_position = driver.find_element(by=By.CLASS_NAME, value="card__btn
 actions.click(insert_to_cart_position)
 actions.perform()
 
+# Inserting CEP info to get past the popup 
 time.sleep(5)
 driver.find_element(by=By.CLASS_NAME, value="card__btn").click()
 driver.find_element(
@@ -103,8 +103,25 @@ except TimeoutExpired:
 driver.find_element(
     by=By.CLASS_NAME, value="zonasul-zonasul-minicart-0-x-closeIcon"
 ).click()
-driver.find_element(by=By.CLASS_NAME, value="card__btn").click()
+#driver.find_element(by=By.CLASS_NAME, value="card__btn").click()
+# try:
+#     empty_cart = driver.find_element(by=By.CLASS_NAME, value='lh-copy vtex-rich-text-0-x-paragraph vtex-rich-text-0-x-paragraph--minicart-empty').click()
+#     if len(empty_cart):
+#         driver.find_element(by=By.CLASS_NAME, value="card__btn").click()
+#     else:
+#         driver.find_element(by=By.CLASS_NAME, value="card__btn").click()
+# except NameError:
+#     driver.find_element(by=By.CLASS_NAME, value="card__btn").click()
 time.sleep(2)
+driver.find_element(by=By.CLASS_NAME, value="card__btn").click()
+# if len(empty_cart):
+#     driver.find_element(by=By.CLASS_NAME, value="card__btn").click()
+# else:
+#     driver.find_element(by=By.CLASS_NAME, value="card__btn").click()
+
+time.sleep(2)
+
+
 # Checking out
 driver.get("https://www.zonasul.com.br/cart")
 driver.find_element(
@@ -144,6 +161,8 @@ driver.find_element(by=By.ID, value="btn-go-to-payment").click()
 time.sleep(3)
 
 # Switching to the frame that keeps credit card inputs
+driver.find_element(by=By.XPATH, value='//*[@id="payment-group-creditCardPaymentGroup"]/span').click()
+time.sleep(1)
 driver.switch_to.frame(0)  
 time.sleep(1)
 driver.find_element(
@@ -187,4 +206,6 @@ Bug relacionado ao carregamento da pagina de confirmacao do cep(as vezes fica ro
 
 Bug relacionado a 'proceed to checkout' quando o carrinho ainda esta vazio
     pensar numa forma de confirmar se o carrinho esta vazio. Deve ter algum elemento em html ou css no codigo fonte que forneca essa informacao
+
+Linha 71 erro. Quando a lista de carrinho fica em branco
 """
