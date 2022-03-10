@@ -78,13 +78,22 @@ driver.find_element(
     by=By.CLASS_NAME, value="zonasul-region-selector-0-x-inputCepModal"
 ).send_keys(cep + "\n")
 
-try:
-    delivery_button_in_page = EC.presence_of_element_located(
-        (By.CLASS_NAME, "zonasul-region-selector-0-x-newModalDeliveryDeliveryButton")
-    )
-    WebDriverWait(driver, timeout).until(delivery_button_in_page)
-except TimeoutExpired:
-    print("Timed out waiting for page to load")
+# While loop to avoid market page bug where the popup keeps loading
+retries = 1
+while retries <= 5:
+    try:
+        delivery_button_in_page = EC.presence_of_element_located(
+            (
+                By.CLASS_NAME,
+                "zonasul-region-selector-0-x-newModalDeliveryDeliveryButton",
+            )
+        )
+        WebDriverWait(driver, timeout).until(delivery_button_in_page)
+        break
+    except TimeoutExpired:
+        print("Timed out waiting for page to load")
+        driver.refresh()
+        retries += 1
 
 driver.find_element(
     by=By.CLASS_NAME, value="zonasul-region-selector-0-x-newModalDeliveryDeliveryButton"
@@ -151,9 +160,10 @@ time.sleep(3)
 driver.find_element(
     by=By.XPATH, value='//*[@id="payment-group-creditCardPaymentGroup"]/span'
 ).click()
-time.sleep(1)
+time.sleep(3)
 driver.switch_to.frame(0)
 time.sleep(1)
+
 driver.find_element(
     by=By.XPATH, value='//*[@id="creditCardpayment-card-0Number"]'
 ).send_keys(card_number)
