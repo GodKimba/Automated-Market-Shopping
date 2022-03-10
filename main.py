@@ -157,9 +157,7 @@ driver.find_element(by=By.ID, value="btn-go-to-payment").click()
 time.sleep(3)
 
 # Switching to the frame that keeps credit card inputs
-driver.find_element(
-    by=By.XPATH, value='//*[@id="payment-group-creditCardPaymentGroup"]/span'
-).click()
+driver.find_element(by=By.ID, value="payment-group-creditCardPaymentGroup").click()
 time.sleep(3)
 driver.switch_to.frame(0)
 time.sleep(1)
