@@ -7,21 +7,23 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.keys import Keys
+import env_keys
 import os
 import time
 
+env_keys.adding_environment_variables()
 
 # ZS credentials
-username = os.environ.get("username_key")
-password = os.environ.get("password_key")
-first_name = os.environ.get("first_name_key")
-last_name = os.environ.get("last_name_key")
-cpf = os.environ.get("cpf_key")
-phone_number = os.environ.get("phone_number_key")
-building_number = os.environ.get("building_number_key")
-complement_number = os.environ.get("complement_number_key")
+username = os.environ["username_key"]
+password = os.environ["password_key"]
+first_name = os.environ["first_name_key"]
+last_name = os.environ["last_name_key"]
+cpf = os.environ["cpf_key"]
+phone_number = os.environ["phone_number_key"]
+building_number = os.environ["building_number_key"]
+complement_number = os.environ["complement_number_key"]
 ship_receiver_name = first_name
-cep = os.environ.get("cep_key")
+cep = os.environ["cep_key"]
 
 # Credit Card Info
 card_number = os.environ.get("card_number_key")
