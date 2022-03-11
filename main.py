@@ -10,7 +10,6 @@ from selenium.webdriver.common.keys import Keys
 import os
 import time
 
-
 # ZonaSul(Market) credentials, using environment variables to hide sensible info
 username = os.environ.get("username_key")
 password = os.environ.get("password_key")
